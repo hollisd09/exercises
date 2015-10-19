@@ -1,0 +1,97 @@
+/*
+.darkness, html {
+	background: black;
+}
+*/
+/*body {
+	padding: 0;
+	background: black;
+}
+*/
+
+
+
+#logo, h1 {
+	display: inline;
+}
+
+#results {
+	border: 1px solid black;
+	min-height: 600px;
+	width: 90%;
+}
+
+button {
+  margin: .5em auto 1em auto;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+input[type="text"] {
+	font-size: 1em;
+	width: 60%;
+	padding: .5em 0 .5em .5em;
+	border: 1px solid black;
+}
+
+#container {
+	padding: 1em;
+	width: 90%;
+}
+
+h3 {
+	margin: 7em 0 0 0;
+}
+
+#control {
+	position: fixed;
+	background-color: white;
+	padding: 1em 0 0 1em;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+/* This is the start of the background on click with "Dark Theme" */
+
+.darkness #control {
+	position: fixed;
+	background-color: black;
+}
+
+.darkness  {
+	background-color: black;
+	color: white;
+}
+
+.darkness #results {
+	border: 1px solid white;
+	min-height: 600px;
+	width: 90%;
+}
+
+.darkness input[type="text"] {
+	background-color: black;
+	color: white;
+	font-size: 1em;
+	width: 60%;
+	padding: .5em 0 .5em .5em;
+	border: 1px solid white;
+}
+
+.large-text {
+	font-size: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
