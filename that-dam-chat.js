@@ -13,17 +13,19 @@ var deleteMessage = document.getElementsByClassName("delete-message");
 var bdy = document.getElementsByTagName("body");
 
 var outputArray = []
+var editMode = false;
 
 document.getElementById("clear-all").setAttribute("disabled", true);
 console.log(document.getElementById("clear-all"));
 
 
 function postMessage () {
-	var post = messageInput.value;
+	var post = "<span>" + messageInput.value + "</span>";
 	var postPart1 = "<div class='posted-message'>";
 	var deleteMessage = "<button class='delete-message' type='button'>Delete</button>";
+	var editMessage = "<button class='edit-message' type='button'>Edit</button>";
 	var postPart2 = "</div>";
-	var output = (postPart1 + post + " " + deleteMessage + postPart2);
+	var output = (postPart1 + post + editMessage + deleteMessage + postPart2);
 	if (outputArray.length < 20) {
 		outputArray.push(output);
 	} else {
@@ -43,8 +45,13 @@ console.log("Delete message?", deleteMessage);
 
 messageInput.addEventListener("keypress", function (e) {
 	if (e.keyCode === 13) {
+		if (editMode === false) {
 		postMessage();
 		document.getElementById("clear-all").removeAttribute("disabled");
+		} else {
+			
+			editMode = false;
+		}
 	}
 
 });
@@ -64,6 +71,10 @@ var deletePost = function(elem) {
 	console.log("this", this);
 }
 
+var editPost = function(elem) {
+	console.log(elem);
+	messageInput.value = elem.target.previousSibling.innerText;
+}
 console.log("Delete message?", deleteMessage);
 // deleteMessage.addEventListener("click", deletePost);
 
@@ -79,6 +90,10 @@ document.querySelector("body").addEventListener("click", function(event) {
   if (event.target.className === "delete-message") {
     console.log("You clicked on a button element");
     deletePost(event);
+}	else if (event.target.className === "edit-message") {
+	console.log("SOMETHINGHAPPENED");
+	editMode = true;
+	editPost(event);
 }
 });
 
