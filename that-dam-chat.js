@@ -1,6 +1,6 @@
 var messageInput = document.getElementById("message-input");
 var clearAll = document.getElementById("clear-all");
-
+var userSelect = document.getElementById("select-user");
 var darkTheme = document.getElementsByName("dark-theme");
 var largeText = document.getElementsByName("large-text");
 
@@ -16,34 +16,45 @@ var messageCount = 0;
 var editMode = false;
 
 document.getElementById("clear-all").setAttribute("disabled", true);
-console.log(document.getElementById("clear-all"));
+
 
 // User object
 var users = {
-  names: ["Xavier", "Joanna", "Mackenzie", "Gunter", "Iveta", "Sven"];
+  names: ["Danielle", "Anderson", "Mathew", "James", "Luke", "Lucas", "Steve"]
 };
+
+for (var i = 0; i < users.names.length; i++) {
+	userSelect.innerHTML += "<input type='radio' name='user' value='" + users.names[i] + "'>" + users.names[i];
+}
 
 function postMessage () {
 
 	messageCount++;
-	console.log("messageCount", messageCount);
 	if (messageCount > 20) {
 		results.removeChild(results.firstChild);
-		console.log("Too many messages", messageCount);
 		messageCount--;
 	} 
 
-	var post = "<span>" + messageInput.value + "</span>";
+	for (var i = 0; i < users.names.length; i++) {
+		if (document.getElementsByName("user")[i].checked === true) {
+			var selectedUser = document.getElementsByName("user")[i].value;
+		}
+	}
+	
+	if (selectedUser === undefined) {
+		selectedUser = "Guest";
+	}
 	var postPart1 = "<div class='posted-message'>";
+	var time = new Date();
+	var whoDisBe = " <span class='user'>" + selectedUser + ": </span>";
+	var post = "<span>" + messageInput.value + "</span>";
 	var deleteMessage = "<button class='delete-message' type='button'>Delete</button>";
 	var editMessage = "<button class='edit-message' type='button'>Edit</button>";
 	var postPart2 = "</div>";
-	var output = (postPart1 + post + editMessage + deleteMessage + postPart2);
+	var output = (postPart1 + time.toLocaleString() + whoDisBe + post + editMessage + deleteMessage + postPart2);
 
 	results.innerHTML += output;
 	messageInput.value = "";
-
-console.log("Delete message?", deleteMessage);
 }
 
 function editMe() {
@@ -52,8 +63,6 @@ function editMe() {
 	messageInput.value = "";
 	editThis.removeAttribute("id");
 	editMode = false;
-
-	console.log("editMode", editMode);
 }
 
 messageInput.addEventListener("keypress", function (e) {
@@ -85,59 +94,33 @@ var deletePost = function(elem) {
 
 var editPost = function(elem) {
 	messageInput.value = elem.target.previousSibling.innerText;
-	elem.target.previousSibling.setAttribute("id", "editme");
-	// console.log("testing:", testing);
-	
+	elem.target.previousSibling.setAttribute("id", "editme");	
 }
-console.log("Delete message?", deleteMessage);
-// deleteMessage.addEventListener("click", deletePost);
 
 document.querySelector("div.posted-message button.delete-message")
 
-
-
-
 document.querySelector("body").addEventListener("click", function(event) {
-  console.log(event);
 
   // Handle the click event on any li
   if (event.target.className === "delete-message") {
-    console.log("You clicked on a button element");
     deletePost(event);
-}	else if (event.target.className === "edit-message") {
-	console.log("SOMETHINGHAPPENED");
+	}	else if (event.target.className === "edit-message") {
 	editMode = true;
 	editPost(event);
-}
+	}
+	messageInput.focus();
 });
-
 
 var yark = document.querySelector('input[name=dark-theme]');
 yark.addEventListener("change", function (event) {
-	console.log(bdy);
 	document.getElementsByTagName("body")[0].classList.toggle("darkness");
 });
 
 
-
-
-
-
-
-
 var yarp = document.querySelector('input[name=large-text]');
 yarp.addEventListener("change", function (event) {
-	console.log(bdy);
 	document.getElementById("container").classList.toggle("large-text");
 });
-
-
-
-/* This is where the edit button will be */
-
-
-
-
 
 
 

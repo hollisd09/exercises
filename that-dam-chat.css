@@ -11,8 +11,11 @@
 
 
 
+
 #logo, h1 {
 	display: inline;
+	font-family: "MS Serif", "New York", serif;
+	color: #383838;
 }
 
 #results {
@@ -86,12 +89,9 @@ h3 {
 	font-size: 2em;
 }
 
-
-
-
-
-
-
+.user {
+	font-weight: bolder;
+}
 
 
 
