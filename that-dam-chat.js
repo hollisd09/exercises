@@ -13,6 +13,7 @@ var deleteMessage = document.getElementsByClassName("delete-message");
 var bdy = document.getElementsByTagName("body");
 
 var outputArray = []
+var messageCount = 0;
 var editMode = false;
 
 document.getElementById("clear-all").setAttribute("disabled", true);
@@ -26,6 +27,9 @@ function postMessage () {
 	var editMessage = "<button class='edit-message' type='button'>Edit</button>";
 	var postPart2 = "</div>";
 	var output = (postPart1 + post + editMessage + deleteMessage + postPart2);
+	messageCount++;
+
+	console.log("messageCount", messageCount);
 	if (outputArray.length < 20) {
 		outputArray.push(output);
 	} else {
@@ -33,14 +37,24 @@ function postMessage () {
 		outputArray.push(output);
 	}
 	results.innerHTML = "";
-	for (var i = 0; i < outputArray.length; i++) {
+
+	for (var i = 0; i < outputArray.length; i++) { 
 		results.innerHTML += outputArray[i];
 	}
-
-
+	results.innerHTML += output;
 	messageInput.value = "";
 
 console.log("Delete message?", deleteMessage);
+}
+
+function editMe() {
+	var editThis = document.getElementById("editme");
+	editThis.innerText = messageInput.value;
+	messageInput.value = "";
+	editThis.removeAttribute("id");
+	editMode = false;
+
+	console.log("editMode", editMode);
 }
 
 messageInput.addEventListener("keypress", function (e) {
@@ -49,8 +63,8 @@ messageInput.addEventListener("keypress", function (e) {
 		postMessage();
 		document.getElementById("clear-all").removeAttribute("disabled");
 		} else {
-			
-			editMode = false;
+			editMe();
+
 		}
 	}
 
@@ -72,8 +86,10 @@ var deletePost = function(elem) {
 }
 
 var editPost = function(elem) {
-	console.log(elem);
 	messageInput.value = elem.target.previousSibling.innerText;
+	elem.target.previousSibling.setAttribute("id", "editme");
+	// console.log("testing:", testing);
+	
 }
 console.log("Delete message?", deleteMessage);
 // deleteMessage.addEventListener("click", deletePost);
