@@ -30,17 +30,21 @@ function postMessage () {
 	messageCount++;
 
 	console.log("messageCount", messageCount);
-	if (outputArray.length < 20) {
-		outputArray.push(output);
-	} else {
-		outputArray.shift();
-		outputArray.push(output);
-	}
-	results.innerHTML = "";
+	if (messageCount >= 20) {
+		results.removeChild(results.firstChild);
+		messageCount--;
+		console.log("Too many messages", messageCount);
+		// outputArray.push(output);
+	} 
+	// else {
+	// 	outputArray.shift();
+	// 	outputArray.push(output);
+	// }
+	// results.innerHTML = "";
 
-	for (var i = 0; i < outputArray.length; i++) { 
-		results.innerHTML += outputArray[i];
-	}
+	// for (var i = 0; i < outputArray.length; i++) { 
+	// 	results.innerHTML += outputArray[i];
+	// }
 	results.innerHTML += output;
 	messageInput.value = "";
 
@@ -127,8 +131,8 @@ yark.addEventListener("change", function (event) {
 
 
 
-var yark = document.querySelector('input[name=large-text]');
-yark.addEventListener("change", function (event) {
+var yarp = document.querySelector('input[name=large-text]');
+yarp.addEventListener("change", function (event) {
 	console.log(bdy);
 	document.getElementById("container").classList.toggle("large-text");
 });
