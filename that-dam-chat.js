@@ -12,39 +12,34 @@ var deleteMessage = document.getElementsByClassName("delete-message");
 
 var bdy = document.getElementsByTagName("body");
 
-var outputArray = []
 var messageCount = 0;
 var editMode = false;
 
 document.getElementById("clear-all").setAttribute("disabled", true);
 console.log(document.getElementById("clear-all"));
 
+// User object
+var users = {
+  names: ["Xavier", "Joanna", "Mackenzie", "Gunter", "Iveta", "Sven"];
+};
 
 function postMessage () {
+
+	messageCount++;
+	console.log("messageCount", messageCount);
+	if (messageCount > 20) {
+		results.removeChild(results.firstChild);
+		console.log("Too many messages", messageCount);
+		messageCount--;
+	} 
+
 	var post = "<span>" + messageInput.value + "</span>";
 	var postPart1 = "<div class='posted-message'>";
 	var deleteMessage = "<button class='delete-message' type='button'>Delete</button>";
 	var editMessage = "<button class='edit-message' type='button'>Edit</button>";
 	var postPart2 = "</div>";
 	var output = (postPart1 + post + editMessage + deleteMessage + postPart2);
-	messageCount++;
 
-	console.log("messageCount", messageCount);
-	if (messageCount >= 20) {
-		results.removeChild(results.firstChild);
-		messageCount--;
-		console.log("Too many messages", messageCount);
-		// outputArray.push(output);
-	} 
-	// else {
-	// 	outputArray.shift();
-	// 	outputArray.push(output);
-	// }
-	// results.innerHTML = "";
-
-	// for (var i = 0; i < outputArray.length; i++) { 
-	// 	results.innerHTML += outputArray[i];
-	// }
 	results.innerHTML += output;
 	messageInput.value = "";
 
@@ -64,11 +59,10 @@ function editMe() {
 messageInput.addEventListener("keypress", function (e) {
 	if (e.keyCode === 13) {
 		if (editMode === false) {
-		postMessage();
-		document.getElementById("clear-all").removeAttribute("disabled");
+			postMessage();
+			document.getElementById("clear-all").removeAttribute("disabled");
 		} else {
 			editMe();
-
 		}
 	}
 
@@ -76,7 +70,7 @@ messageInput.addEventListener("keypress", function (e) {
 
 var clear = function () {
 	results.innerHTML = "";
-	outputArray = [];
+	messageCount = 0;
 	document.getElementById("clear-all").setAttribute("disabled", true);
 }
 
