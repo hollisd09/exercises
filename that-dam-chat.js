@@ -77,7 +77,7 @@ messageInput.keypress(function (event) {
 });
 
 var clear = function () {
-	results.innerHTML = "";
+	results.html("");
 	messageCount = 0;
 	$("#clear-all").attr("disabled", true);
 }
